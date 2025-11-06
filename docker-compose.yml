@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: viajespol_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html:cached
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: mysql://root:pol2812@db:3306/viajespol
+      DEFAULT_URI: http://localhost:8080
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: viajespol_db
+    environment:
+      MYSQL_ROOT_PASSWORD: pol2812
+      MYSQL_DATABASE: viajespol
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  db_data:
