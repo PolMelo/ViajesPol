@@ -11,10 +11,12 @@
         "symfony/twig-bundle": "^7.3",
         "doctrine/orm": "^3.5",
         "doctrine/doctrine-migrations-bundle": "^3.5",
-        "doctrine/doctrine-bundle": "^2.10"
+        "doctrine/doctrine-bundle": "^2.10",
+        "symfony/security-bundle": "^7.3"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.64"
+        "symfony/maker-bundle": "^1.64",
+        "doctrine/doctrine-fixtures-bundle": "^4.3"
     },
     "config": {
         "allow-plugins": {

@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect all requests to index.php if file/folder does not exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Disable directory listings
+Options -Indexes
+
+# Security: deny access to hidden files (.env, .git, etc)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

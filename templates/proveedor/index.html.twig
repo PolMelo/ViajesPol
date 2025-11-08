@@ -1,0 +1,217 @@
+{% extends 'viewer.html.twig' %}
+
+{% block viewer_content %}
+<style>
+    /* Botón principal */
+    button {
+        background-color: #198754;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #157347;
+    }
+
+    /* Filtros */
+    form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    input, select {
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    /* Tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    thead {
+        background-color: #0d6efd;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    th, td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    tbody tr:hover {
+        background-color: #e9f2ff;
+    }
+
+    .status-true {
+        color: #198754;
+        font-weight: bold;
+    }
+
+    .status-false {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    /* Acciones */
+    .acciones a, .acciones button {
+        background: none;
+        border: none;
+        color: #0d6efd;
+        cursor: pointer;
+        text-decoration: underline;
+        padding: 0;
+        font-size: 0.9rem;
+    }
+
+    .acciones button {
+        color: #dc3545;
+    }
+
+    .acciones a:hover {
+        color: #0a58ca;
+    }
+
+    .acciones button:hover {
+        color: #bb2d3b;
+    }
+
+    /* Botón "añadir" */
+    .btn-add {
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    .btn-add:hover {
+        background-color: #0b5ed7;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="top-bar">
+        <a href="{{ path('app_proveedor_nuevo') }}" class="btn-add">Añadir proveedor</a>
+    </div>
+{% endif %}
+
+<!-- FILTROS con placeholders para que el user sepa lo que esta haciendo-->
+<form method="get" action="{{ path('app_proveedores') }}">
+    <input type="text" name="id" value="{{ filtros.id }}" placeholder="ID">
+    <input type="text" name="cif" value="{{ filtros.cif }}" placeholder="CIF">
+    <input type="text" name="nombre" value="{{ filtros.nombre }}" placeholder="Nombre">
+    <input type="text" name="correo" value="{{ filtros.correo }}" placeholder="Correo electrónico">
+
+<!-- Para actividad y tipo he hecho desplegables que no dejan margen de error al usuario -->
+
+    <select name="activo">
+        <option value="">Activo/Inactivo</option>
+        <option value="true" {% if filtros.activo == 'true' %}selected{% endif %}>Activo</option>
+        <option value="false" {% if filtros.activo == 'false' %}selected{% endif %}>Inactivo</option>
+    </select>
+
+    <select name="tipo_proveedor">
+        <option value="">Tipo proveedor</option>
+        <option value="Hotel" {% if filtros.tipo_proveedor|lower == 'hotel' %}selected{% endif %}>Hotel</option>
+        <option value="Crucero" {% if filtros.tipo_proveedor|lower == 'crucero' %}selected{% endif %}>Crucero</option>
+        <option value="Estación de esquí" {% if filtros.tipo_proveedor|lower == 'estación de esquí' %}selected{% endif %}>Estación de esquí</option>
+        <option value="Parque temático" {% if filtros.tipo_proveedor|lower == 'parque temático' %}selected{% endif %}>Parque temático</option>
+    </select>
+
+    <button type="submit">🔍 Filtrar</button>
+</form>
+<!-- TABLA DE PROVEEDORES con todas las columnas, en caso de ser admin tendra la columna extra de acciones-->
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CIF</th>
+                <th>Nombre</th>
+                <th>Correo electrónico</th>
+                <th>Teléfono</th>
+                <th>Teléfono 2</th>
+                <th>Tipo proveedor</th>
+                <th>Activo</th>
+                <th>Fecha creación</th>
+                <th>Última modificación</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Acciones</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <!-- Un bucle para mostrar todos los proveedors -->
+        <tbody>
+            {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.id }}</td>
+                    <td>{{ proveedor.cif }}</td>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.correoElectronico }}</td>
+                    <td>{{ proveedor.telefono }}</td>
+                    <td>{{ proveedor.telefono2 ?? '-' }}</td>
+                    <td>{{ proveedor.tipoProveedor }}</td>
+                    <td>
+                    <!-- Cambiamos el texto y la clsase dependiendo si es tru or false (darle colores para que sea mas visual) -->
+                        {% if proveedor.activo %}
+                            <span class="status-true">Activo</span>
+                        {% else %}
+                            <span class="status-false">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ proveedor.fechaCreacion ? proveedor.fechaCreacion|date('d/m/Y H:i') : '-' }}</td>
+                    <td>{{ proveedor.ultimaModificacion ? proveedor.ultimaModificacion|date('d/m/Y H:i') : '-' }}</td>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td class="acciones">
+                        <!-- Aqui estan las acciones eliminar y editar, si quisieras editar te redirige y si quieres borrar te hace confirmarlo
+                        indicandote tambien el nombre del proveedor para que sepas lo que haces
+                        (Estilo 2FA para evitar eliminaciones sin querer) -->
+                        <a href="{{ path('app_proveedor_editar', {id: proveedor.id}) }}">Editar</a> |
+                        <form method="post" action="{{ path('app_proveedor_eliminar', {id: proveedor.id}) }}"style="display:inline"
+                          onsubmit="return confirm('¿Eliminar el proveedor {{ proveedor.nombre|e('js') }}?');">
+                          <input type="hidden" name="_token" value="{{ csrf_token('eliminar' ~ proveedor.id) }}">
+                         <button type="submit">Eliminar</button>
+                        </form>
+
+                        </td>
+                    {% endif %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11" class="text-center text-muted py-4">No se encontraron resultados</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 text-center">
+            <img src="https://www.viajesparati.com/wp-content/uploads/2018/11/30120342/ViajesParaTi.png" 
+                 alt="Viajes Para Ti" 
+                 class="img-fluid mx-auto mb-3" 
+                 style="max-height: 80px;">
+
+           
+
+            {% if error %}
+                <div class="alert alert-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form method="post" class="text-start">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Correo electrónico</label>
+                    <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" required autofocus>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" name="_password" id="password" class="form-control" required>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button class="btn btn-primary w-100" type="submit">
+                    Iniciar sesión
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

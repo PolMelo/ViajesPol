@@ -32,6 +32,9 @@ class Proveedor
     #[ORM\Column]
     private ?bool $activo = null;
 
+    #[ORM\Column(length: 9)]
+    private ?string $cif = null;
+
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $fecha_creacion = null;
 
@@ -39,7 +42,7 @@ class Proveedor
     private ?\DateTime $ultima_modificacion = null;
 
 
-    //getter setter
+    // --- Getters y setters ---
 
     public function getId(): ?int { return $this->id; }
 
@@ -61,11 +64,13 @@ class Proveedor
     public function isActivo(): ?bool { return $this->activo; }
     public function setActivo(bool $activo): static { $this->activo = $activo; return $this; }
 
+    public function getCif(): ?string { return $this->cif; }
+    public function setCif(string $cif): static { $this->cif = $cif; return $this; }
+
     public function getFechaCreacion(): ?\DateTimeImmutable { return $this->fecha_creacion; }
     public function getUltimaModificacion(): ?\DateTime { return $this->ultima_modificacion; }
 
-
-    // Para la fecha de creacion y el update (se pone la hora justa de antes de actualizar)
+    // --- Lifecycle Callbacks ---
 
     #[ORM\PrePersist]
     public function onPrePersist(): void
