@@ -1,24 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administración de proveedores{% endblock %}
+{% block title %}Proveedores{% endblock %}
 
 {% block body %}
-    <div class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-8">
-        <header class="w-full flex justify-between items-center mb-10">
-            <h1 class="text-2xl font-bold text-green-600">Panel de Administración</h1>
-            <a href="{{ path('app_logout') }}" class="text-red-600 font-semibold hover:underline">
-                Cerrar sesión
-            </a>
-        </header>
+<style>
+    body {
+        background-color: #f4f6f8;
+    }
 
-        <main class="bg-white shadow rounded-2xl p-8 w-full max-w-3xl text-center">
-            <h2 class="text-xl font-semibold mb-4">Bienvenido, {{ app.user.email }}</h2>
-            <p class="text-gray-600">Puedes crear, editar, visualizar y eliminar proveedores.</p>
+    .viewer-wrapper {
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
 
-                <a href="{{ path('app_home') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                    Ver proveedores
-                </a>
-            </div>
-        </main>
-    </div>
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+        color: #0d6efd;
+        font-weight: 700;
+    }
+
+    header a {
+        color: #dc3545;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    header a:hover {
+        text-decoration: underline;
+    }
+
+    main {
+        background-color: #fff;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    main h2 {
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    main p {
+        color: #6c757d;
+    }
+</style>
+
+<div class="viewer-wrapper">
+    <header>
+        <h1>Proveedores</h1>
+        <a href="{{ path('app_logout') }}">Cerrar sesión</a>
+    </header>
+
+    <main>
+        <h2>Bienvenido, {{ app.user.email }}</h2>
+        <p>
+            Tienes acceso completo a la base de datos.<br>
+            Si se te ha asignado el rol equivocado, contacta con el equipo informático.
+        </p>
+
+        {% block viewer_content %}{% endblock %}
+    </main>
+</div>
 {% endblock %}
