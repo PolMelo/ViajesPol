@@ -1,0 +1,240 @@
+/* ==== TABLA GENERAL ==== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    table-layout: auto;
+}
+
+/* ==== ENCABEZADOS ==== */
+thead {
+    background-color: #0d6efd;
+    color: white;
+}
+
+th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ==== CELDAS ==== */
+td {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #dee2e6;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* ==== COLUMNA ID FIJA 
+Así siempre veremos la id incluso en pantallas pequeñas y sabremos que tocamos==== */
+th:first-child,
+td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #fff;
+    z-index: 2;
+    box-shadow: 2px 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Color especial para el encabezado ID */
+th:first-child {
+    background-color: #0b5ed7;
+    color: #fff;
+    z-index: 3;
+}
+
+/* ==== FILAS ==== */
+tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+/* ==== ESTADOS ==== */
+.status-true {
+    color: #198754;
+    font-weight: 600;
+}
+
+.status-false {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* ==== ACCIONES ==== */
+.acciones a,
+.acciones button {
+    color: #0d6efd;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.acciones a:hover,
+.acciones button:hover {
+    text-decoration: underline;
+}
+
+.acciones form {
+    display: inline;
+}
+
+/* ==== FORMULARIO DE FILTROS ==== */
+form[action*="app_proveedores"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+form[action*="app_proveedores"] input,
+form[action*="app_proveedores"] select {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+}
+
+form[action*="app_proveedores"] button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+form[action*="app_proveedores"] button:hover {
+    background-color: #0b5ed7;
+}
+
+/* ==== BOTÓN "AÑADIR PROVEEDOR" ==== */
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.btn-add {
+    background-color: #198754;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-add:hover {
+    background-color: #157347;
+}
+
+
+/* Encabezado fijo */
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #0d6efd;
+    color: #fff;
+    z-index: 2; 
+    text-align: left;
+}
+
+/* ==== RESPONSIVO ==== */
+@media (max-width: 992px) {
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.5rem 0.6rem;
+    }
+
+    form[action*="app_proveedores"] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .top-bar {
+        justify-content: center;
+    }
+}
+
+
+
+
+/* ============================
+   ESTILOS DEL FORMULARIO DE FILTROS
+   ============================ */
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+form input[type="text"],
+form select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    min-width: 140px;
+    flex: 1;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input[type="text"]:focus,
+form select:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+}
+
+form button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.55rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #0b5ed7;
+}
+
+/* Ajuste responsivo para móviles */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form input,
+    form select,
+    form button {
+        width: 100%;
+    }
+}

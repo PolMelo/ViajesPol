@@ -1,0 +1,115 @@
+/* === FORMULARIO DE CREAR / EDITAR PROVEEDOR === */
+
+.form-container {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    color: #0d6efd;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* === CAMPOS === */
+label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #333;
+}
+
+input,
+select {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+/* === CHECKBOX === */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-check input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* === BOTONES === */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+button,
+.btn-cancel {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Botón principal */
+button {
+    background-color: #198754;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #157347;
+    transform: scale(1.03);
+}
+
+/* Botón cancelar */
+.btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-cancel:hover {
+    background-color: #bb2d3b;
+    transform: scale(1.03);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    button,
+    .btn-cancel {
+        width: 100%;
+    }
+}
