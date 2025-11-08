@@ -40,6 +40,47 @@ docker-compose up -d --build
 
 ### 3️⃣ Instalar dependencias
 
+## 📦 Dependencias principales
+
+El proyecto utiliza las siguientes librerías y bundles de Symfony y Doctrine:
+
+| Paquete | Descripción |
+|----------|-------------|
+| **symfony/framework-bundle** | Núcleo del framework Symfony: controla el ciclo de vida de la aplicación y el contenedor de servicios. |
+| **symfony/runtime** | Punto de entrada moderno para iniciar la aplicación Symfony. |
+| **symfony/http-foundation** | Maneja las peticiones y respuestas HTTP. |
+| **symfony/routing** | Define las rutas (URLs) de la aplicación. |
+| **symfony/dependency-injection** | Gestiona los servicios y la inyección de dependencias. |
+| **symfony/config** | Carga y procesa configuraciones desde archivos YAML, PHP o XML. |
+| **symfony/yaml** | Permite leer y escribir archivos YAML. |
+| **symfony/twig-bundle** | Motor de plantillas Twig, utilizado para las vistas. |
+| **symfony/security-bundle** | Gestiona autenticación, roles y seguridad. |
+| **symfony/orm-pack** | Paquete que instala e integra Doctrine ORM con Symfony. |
+| **doctrine/orm** | ORM que mapea las entidades PHP a tablas en la base de datos. |
+| **doctrine/doctrine-bundle** | Integración entre Symfony y Doctrine. |
+| **doctrine/doctrine-migrations-bundle** | Permite crear y ejecutar migraciones en la base de datos. |
+
+---
+
+### 🧪 Dependencias de desarrollo
+
+Estas se usan solo en entorno de desarrollo:
+
+| Paquete | Descripción |
+|----------|-------------|
+| **symfony/maker-bundle** | Genera código automáticamente con comandos (`make:entity`, `make:controller`, etc.). |
+| **doctrine/doctrine-fixtures-bundle** | Permite cargar datos de prueba (fixtures) en la base de datos. |
+
+---
+
+✅ Con estas dependencias, el proyecto incluye:
+- Sistema de login y roles.
+- Motor de plantillas Twig.
+- Gestión ORM con Doctrine.
+- Migraciones y fixtures.
+- Herramientas para desarrollo rápido.
+
+
 
 
 
@@ -99,3 +140,26 @@ Una vez que el proyecto esté levantado y las *fixtures* se hayan cargado, podre
 👉 [http://localhost:8080](http://localhost:8080)
 
 Luego, inicia sesión con uno de los usuarios de prueba anteriores según el tipo de acceso que quieras probar.
+
+
+ ### 7️⃣ 🧰 Tecnologías principales
+
+Symfony 7.3
+
+PHP 8+
+
+MySQL 8.0
+
+Docker & Docker Compose
+
+Doctrine ORM
+
+Fixtures Bundle
+
+Twig
+
+ ### 8️⃣ 👤 Autor
+
+Pol Melo 
+[GitHub](https://github.com/PolMelo/)  
+[LinkedIn](https://www.linkedin.com/in/polmelo/)
