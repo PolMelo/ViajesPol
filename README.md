@@ -1,10 +1,10 @@
 
 
 
-# Proyecto Symfony (Docker)
+# Proyecto Symfony — ViajesPol (Docker)
 
-Este proyecto es una aplicación desarrollada con **Symfony**, que se ejecuta dentro de un entorno **Docker**.  
-Incluye base de datos y datos de ejemplo (fixtures) para probar el sistema fácilmente.
+Aplicación desarrollada con **Symfony** 7.3 y ejecutada dentro de un entorno **Docker**.
+Incluye base de datos MySQL, datos de ejemplo (fixtures) y autenticación por roles.
 
 ---
 
@@ -39,6 +39,16 @@ docker-compose up -d --build
 ```
 
 ### 3️⃣ Instalar dependencias
+
+# Entrar al contenedor PHP
+```bash
+docker exec -it viajespol_app bash
+```
+# Instalar dependencias del proyecto Symfony
+```bash
+composer install
+```
+
 
 ## 📦 Dependencias principales
 
@@ -140,6 +150,31 @@ Una vez que el proyecto esté levantado y las *fixtures* se hayan cargado, podre
 👉 [http://localhost:8080](http://localhost:8080)
 
 Luego, inicia sesión con uno de los usuarios de prueba anteriores según el tipo de acceso que quieras probar.
+
+
+#### Comandos útiles de Symfony
+
+``` bash
+
+# Ver rutas registradas
+php bin/console debug:router
+
+# Ver entidades disponibles
+php bin/console doctrine:mapping:info
+
+# Ver validaciones aplicadas (ejemplo con Proveedor)
+php bin/console debug:validator App\\Entity\\Proveedor
+ 
+ ```
+
+#### 🔄 Resetear base de datos y recargar fixtures
+``` bash
+php bin/console doctrine:database:drop --force
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate --no-interaction
+php bin/console doctrine:fixtures:load --no-interaction
+
+ ```
 
 
  ### 7️⃣ 🧰 Tecnologías principales
