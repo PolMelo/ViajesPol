@@ -9,8 +9,7 @@
 <div class="form-container">
     <h2>{{ titulo }}</h2>
 
-    {# === FEEDBACK DEL USUARIO === #}
-    {# Solo mostramos mensajes de éxito o error (no los de eliminación) #}
+    {# === FEEDBACK AL USUARIO === #}
     {% for tipo, mensajes in app.flashes %}
         {% if tipo in ['success', 'error', 'warning'] %}
             {% for mensaje in mensajes %}
@@ -21,7 +20,7 @@
         {% endif %}
     {% endfor %}
 
-    {# Si hay errores de validación definidos manualmente #}
+    {# === ERRORES DE VALIDACIÓN === #}
     {% if errores is defined and errores|length > 0 %}
         <div class="alert alert-error">
             <ul>
@@ -33,14 +32,14 @@
     {% endif %}
 
     {# === FORMULARIO === #}
-    <form method="post" novalidate>
+    <form method="post" >
         <!-- CIF -->
         <label for="cif">CIF*</label>
         <input type="text" id="cif" name="cif"
                value="{{ proveedor.cif ?? '' }}"
                maxlength="9"
                pattern="[A-Za-z0-9]{1,9}"
-               title="El CIF debe tener máximo 9 caracteres"
+               title="El CIF debe tener máximo 9 caracteres alfanuméricos"
                required>
 
         <!-- Nombre -->
@@ -55,19 +54,21 @@
         <input type="email" id="correo" name="correo"
                value="{{ proveedor.correoElectronico ?? '' }}"
                maxlength="255"
-               required>
+               required
+               title="Introduce un correo válido (ejemplo: usuario@dominio.com)">
         {% if errors is defined and errors.correo is defined %}
             <p class="error-message">{{ errors.correo }}</p>
         {% endif %}
 
-        <!-- Teléfono -->
+        <!-- Teléfono principal -->
         <label for="telefono">Teléfono*</label>
         <input type="text" id="telefono" name="telefono"
                value="{{ proveedor.telefono ?? '' }}"
                maxlength="20"
-               required>
+               required
+               title="Introduce un número de teléfono válido">
 
-        <!-- Teléfono 2 -->
+        <!-- Teléfono 2 (opcional) -->
         <label for="telefono2">Teléfono 2</label>
         <input type="text" id="telefono2" name="telefono2"
                value="{{ proveedor.telefono2 ?? '' }}"
@@ -83,7 +84,7 @@
             <option value="Parque temático" {% if proveedor.tipoProveedor == 'Parque temático' %}selected{% endif %}>Parque temático</option>
         </select>
 
-        <!-- Check activo -->
+        <!-- Estado activo -->
         <div class="form-check">
             <input
                 type="checkbox"
