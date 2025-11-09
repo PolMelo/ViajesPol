@@ -1,4 +1,7 @@
-{% extends 'viewer.html.twig' %}
+
+
+{% extends is_granted('ROLE_ADMIN') ? 'admin.html.twig' : 'viewer.html.twig' %}
+
 
 {% block stylesheets %}
     {{ parent() }}

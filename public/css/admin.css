@@ -1,13 +1,17 @@
 body {
     background-color: #f4f6f8;
+    margin: 0;
+    font-family: "Segoe UI", Roboto, sans-serif;
 }
 
+/* Contenedor general */
 .viewer-wrapper {
-    padding: 2rem;
-    max-width: 1400px;
+    padding: 1.5rem 2rem;
+    max-width: 95vw;           /* antes 1400px → ahora usa el 95% del ancho visible */
     margin: 0 auto;
 }
 
+/* Encabezado */
 header {
     display: flex;
     justify-content: space-between;
@@ -18,30 +22,63 @@ header {
 header h1 {
     color: #0d6efd;
     font-weight: 700;
+    font-size: 1.8rem;
 }
 
 header a {
     color: #dc3545;
     font-weight: 600;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 header a:hover {
+    color: #a71d2a;
     text-decoration: underline;
 }
 
+/* Cuerpo principal */
 main {
     background-color: #fff;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    overflow-x: auto;          /* Si la tabla es muy ancha, aparece scroll interno */
 }
 
 main h2 {
     font-weight: 600;
     color: #343a40;
+    margin-bottom: 0.5rem;
 }
 
 main p {
     color: #6c757d;
+    margin-bottom: 1.5rem;
+    max-width: 90%;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 992px) {
+    .viewer-wrapper {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+
+
+/* Mato el padding heredado pq la pagina admin no se mostraba bien */
+.container-fluid {
+    padding: 0 !important;
 }
