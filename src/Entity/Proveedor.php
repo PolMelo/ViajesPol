@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProveedorRepository;
 use Doctrine\ORM\Mapping as ORM;
+// AÑADIMOS EL USE PARA LAS VALIDACIONES
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProveedorRepository::class)]
@@ -17,7 +19,10 @@ class Proveedor
     #[ORM\Column(length: 255)]
     private ?string $nombre = null;
 
+    // Para validar el email y que tenga formato valido
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "El correo electrónico es obligatorio.")]
+    #[Assert\Email(message: "El correo '{{ value }}' no tiene un formato válido.")]
     private ?string $correo_electronico = null;
 
     #[ORM\Column(length: 20)]
@@ -42,7 +47,7 @@ class Proveedor
     private ?\DateTime $ultima_modificacion = null;
 
 
-    // --- Getters y setters ---
+    //  Getters y setters
 
     public function getId(): ?int { return $this->id; }
 
@@ -70,7 +75,7 @@ class Proveedor
     public function getFechaCreacion(): ?\DateTimeImmutable { return $this->fecha_creacion; }
     public function getUltimaModificacion(): ?\DateTime { return $this->ultima_modificacion; }
 
-    // --- Lifecycle Callbacks ---
+    // para tener las fechas automaticamente
 
     #[ORM\PrePersist]
     public function onPrePersist(): void

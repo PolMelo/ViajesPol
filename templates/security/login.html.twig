@@ -3,6 +3,8 @@
 {% block title %}Iniciar sesión{% endblock %}
 
 {% block body %}
+
+<!-- logo -->
 <div class="row justify-content-center">
     <div class="col-md-5">
         <div class="card p-4 text-center">
@@ -16,7 +18,7 @@
             {% if error %}
                 <div class="alert alert-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-
+<!-- Formularo para iniciar sesion -->
             <form method="post" class="text-start">
                 <div class="mb-3">
                     <label for="username" class="form-label">Correo electrónico</label>
